@@ -11,7 +11,7 @@ public class DifferentialPhaseModulation extends BaseModulation {
     public DifferentialPhaseModulation(double amplitude, double frame, int[] code) {
         super(amplitude, frame, code);
     }
-    public int changePhase(double time){
+    private int changePhase(double time){
 
         for (int x = 0; x < 8; x++) {
             if (time >= x && time < (x + 1) && Math.floor(time) > Math.floor(timePrev)) {
@@ -27,11 +27,6 @@ public class DifferentialPhaseModulation extends BaseModulation {
         }
         timePrev = time;
         return h;
-    }
-    private int getCoefficient(int num){
-        int phasecoeff = 0;
-        if (code[num] == 1) phasecoeff = 1;
-            return phasecoeff;
     }
     @Override
     public XYDataset createDataset() {

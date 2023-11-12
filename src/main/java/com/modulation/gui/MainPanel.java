@@ -9,7 +9,6 @@ import org.jfree.data.xy.XYDataset;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainPanel extends JPanel {
@@ -24,19 +23,18 @@ public class MainPanel extends JPanel {
     private BaseModulation modulation;
     private JPanel chartPanel;
     private ButtonGroup selectors = new ButtonGroup();
-    private ActionListener listener;
     private double amplitude = 2;
     private double frame = 5;
     private int[] code = {1,1,1,0,0,0,0,1};
     private int bits = 2;
     public MainPanel() {
-        modulation = new DifferentialPhaseModulation(amplitude,frame,code);
+        modulation = new AmplitudeModulation(amplitude,frame,code);
         chartPanel = createChartsPanel(modulation.createDataset());
-        am = new JRadioButton("Амплитудная модуляция",false);
+        am = new JRadioButton("Амплитудная модуляция",true);
         bfm= new JRadioButton("Бинарная частотная модуляция",false);
         mfm = new JRadioButton("Многочастотная модуляция",false);
         tlpm = new JRadioButton("Двухуровневая фазовая модуляция",false);
-        dpm = new JRadioButton("Дифференциальная фазовая модуляция",true);
+        dpm = new JRadioButton("Дифференциальная фазовая модуляция",false);
         qpm = new JRadioButton("Квадратурная фазовая модуляция",false);
         setLayout(new BorderLayout());
         add(chartPanel,BorderLayout.CENTER);
@@ -58,7 +56,7 @@ public class MainPanel extends JPanel {
         panel.add(tlpm);
         panel.add(dpm);
         panel.add(qpm);
-        listener = e -> {
+        ActionListener listener = e -> {
             if (am.isSelected()) {
                 modulation = new AmplitudeModulation(amplitude, frame, code);
                 this.remove(chartPanel);
@@ -83,8 +81,8 @@ public class MainPanel extends JPanel {
                 chartPanel = createChartsPanel(modulation.createDataset());
                 this.add(chartPanel);
             }
-            if (dpm.isSelected()){
-                modulation = new DifferentialPhaseModulation(amplitude,frame,code);
+            if (dpm.isSelected()) {
+                modulation = new DifferentialPhaseModulation(amplitude, frame, code);
                 this.remove(chartPanel);
                 chartPanel = createChartsPanel(modulation.createDataset());
                 this.add(chartPanel);
@@ -125,9 +123,6 @@ public class MainPanel extends JPanel {
         String axisY = "s(t)";
         JFreeChart chart = ChartFactory.createXYLineChart(chartTitle, axisX, axisY, dataset);
         return new ChartPanel(chart);
-    }
-    private JPanel getThis(){
-        return this;
     }
 
 }

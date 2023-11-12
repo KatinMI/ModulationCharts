@@ -30,10 +30,10 @@ public class QuadraturePhaseModulation extends BaseModulation {
         double phase = 0;
         for (int x = 0; x < 8 / bits - 1; x++){
             if(time >= x * bits && time < (x * bits+bits)){
-                frame = getThirdCoefficient(x);
+                phase = getThirdCoefficient(x);
             }
             if (time == 8.0){
-                frame = getThirdCoefficient(8 / bits) * bits;
+                phase = getThirdCoefficient(8 / bits) * bits;
             }
         }
         return phase;
