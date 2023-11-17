@@ -28,7 +28,7 @@ public class MultiFrequencyModulation extends BaseFrequencyModulation {
     private double getSecondCoefficient(int num){
         double one = 0;
     for(int x = num * bits; x < num * bits + bits;x++ ){
-    one += getCoefficient(num);
+    one += getCoefficient(x);
     }
     return one;
     }

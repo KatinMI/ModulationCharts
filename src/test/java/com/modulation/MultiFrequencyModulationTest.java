@@ -28,7 +28,7 @@ private MultiFrequencyModulation mfm;
     }
 }
     @ParameterizedTest
-    @CsvSource({"1,2","2,0","5,2"})
+    @CsvSource({"1,0","2,3","5,2"})
     public void getSecondCoefficient(int num, double expected){
         try {
             Method method = mfm.getClass().getDeclaredMethod("getSecondCoefficient", int.class);
@@ -39,7 +39,7 @@ private MultiFrequencyModulation mfm;
         }
     }
     @ParameterizedTest
-    @CsvSource({"1,5","2,1","5,5"})
+    @CsvSource({"1,1","2,7","5,5"})
     public void getThirdCoefficient(int num, double expected){
         try {
             Method method = mfm.getClass().getDeclaredMethod("getThirdCoefficient", int.class);
@@ -50,7 +50,7 @@ private MultiFrequencyModulation mfm;
         }
     }
     @ParameterizedTest
-    @CsvSource({"1,9","2,5","5,1"})
+    @CsvSource({"1,7","2,1","5,7"})
     public void getFrame(double time, double expected){
     assertEquals(expected,mfm.getFrame(time));
     }
