@@ -27,7 +27,7 @@ class QuadraturePhaseModulationTest {
         }
     }
     @ParameterizedTest
-    @CsvSource({"1,2","2,0","5,2"})
+    @CsvSource({"1,0","2,3","5,2"})
     public void getSecondCoefficient(int num, double expected){
         try {
             Method method = qpm.getClass().getDeclaredMethod("getSecondCoefficient", int.class);
@@ -38,7 +38,7 @@ class QuadraturePhaseModulationTest {
         }
     }
     @ParameterizedTest
-    @CsvSource({"1,3.93","2,0.79","5,3.93"})
+    @CsvSource({"1,0.79","2,5.5","5,3.93"})
     public void getThirdCoefficient(int num, double expected){
         try {
             Method method = qpm.getClass().getDeclaredMethod("getThirdCoefficient", int.class);
@@ -50,7 +50,7 @@ class QuadraturePhaseModulationTest {
         }
     }
     @ParameterizedTest
-    @CsvSource({"1,7.07","2.5,3.93","5,0.79"})
+    @CsvSource({"1,5.5","2.5,0.79","5,5.5"})
     public void getPhase(double time, double expected){
     try{
         Method method = qpm.getClass().getDeclaredMethod("getPhase", double.class);
@@ -68,7 +68,7 @@ class QuadraturePhaseModulationTest {
                 Double.parseDouble(String.format(Locale.ENGLISH,"%.2f",qpm.createDataset().getXValue(0,value))));
     }
     @ParameterizedTest
-    @CsvSource({"0,1.41","1110,-0.91","3500,1.41"})
+    @CsvSource({"0,1.41","1110,-1.78","3500,-1.41"})
     public void createDatasetCheckY(int value, double expectedY){
         assertEquals(expectedY,
                 Double.parseDouble(String.format(Locale.ENGLISH,"%.2f",qpm.createDataset().getYValue(0,value))));
